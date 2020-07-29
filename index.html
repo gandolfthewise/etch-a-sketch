@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            .square {
+                border: 1px solid black;
+                flex: auto;
+                padding: 0;
+                margin: 0;
+                box-sizing:border-box;
+            }
+            .container {
+                width:960px;
+                height:960px;
+                border: 1px solid black;
+                display: flex;
+                flex-wrap:wrap;
+                justify-content: space-evenly;
+                align-content: space-around;
+                position: absolute;
+                top: 10%;
+                Left: 25%;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="resetGrid" onclick="resetGrid()">Reset</button>
+        <div class="container">
+        </div>
+    
+    <script>
+        //function to reset the grid and ask how many squares/side
+        let noPerSide = 16;
+        let noSquares = 16*16;
+        let squareLength = 960/16;
+        const container = document.querySelector('.container');
+        function resetGrid() {
+            noPerSide = prompt("How many squares/side?");
+            noSquares = noPerSide*noPerSide;
+            squareLength = 960/noPerSide;
+            createGrid();
+        }
+          function createGrid() {
+              let squareList = Array.from(document.querySelectorAll('.square'));
+              for (i=0;i<squareList.length;i++) {
+                  container.removeChild(squareList[i]);
+              }
+            for (i=0;i<noSquares;i++) {
+                const square = document.createElement('div');
+                square.classList.add('square');
+                square.setAttribute('style', `background-color:grey; width:${squareLength}px; height:${squareLength}px`);
+                square.addEventListener('mouseenter', e => {
+                    square.style.backgroundColor = 'red';
+                });
+                container.appendChild(square);
+            }
+          }
+          createGrid();
+           
+        
+    </script>
+    </body>
+</html>
